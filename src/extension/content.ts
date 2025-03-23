@@ -3,7 +3,7 @@ import { IScriptItem, UiEvent } from '../types';
 function execute(code: string) {
   const script = document.createElement('script');
   document.documentElement.appendChild(script);
-  // 使用 Promise 來延遲執行，確保 script.remove(); 先執行完畢，這樣讀取 document.body 內容時就不會讀到本身 script
+  // Use Promise to delay execution and ensure that script.remove(); is executed first, so that the script itself will not be read when reading the content of document.body
   script.innerHTML = `
     (new Promise((resolve, reject) => {
       resolve()
@@ -34,7 +34,7 @@ chrome.runtime.onMessage.addListener((
 ) => {
   switch (event.type) {
     case UiEvent.EMIT_CODE:
-      // 執行自訂 script
+      // Execute custom script
       execute(event.code);
       sendResponse('ok');
       break;
