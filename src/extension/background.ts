@@ -3,11 +3,11 @@ import { Base64 } from 'js-base64';
 import { IScriptItem, MenuItemId } from '../types';
 
 /**
- * 外掛常駐背景程式
- * background.js 在打開 chrome 後只會觸發一次
+ * Plug-in permanent background program
+ * background.js will only fire once after opening chrome
  */
 
-// 導出所有腳本
+// Export all scripts
 function exportScripts() {
   chrome.storage.local.get(
     ['scripts'], (result: { scripts?: Array<IScriptItem> }) => {
@@ -22,7 +22,7 @@ function exportScripts() {
   );
 }
 
-// 主選單設置 - 外掛安裝時
+// Main Menu Settings - When installing plugins
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: MenuItemId.ABOUT_XSS,
@@ -34,7 +34,7 @@ chrome.runtime.onInstalled.addListener(() => {
     title: 'Export Scripts',
     contexts: ['browser_action'],
   });
-  // 塞入預設 script example
+  // Plug in presets script example
   const scripts: Array<IScriptItem> = [
     {
       title: 'Inject Jquery',
@@ -79,7 +79,7 @@ chrome.runtime.onInstalled.addListener(() => {
   );
 });
 
-// 點擊自訂選單時
+// When you click on the Customize menu
 chrome.contextMenus.onClicked.addListener((info) => {
   if (info.menuItemId === MenuItemId.ABOUT_XSS) {
     void chrome.tabs.create({
