@@ -5,18 +5,18 @@
 
 ## Introduction
 
-此為 chrome extension 工具，可以注入自訂 `Script` 於當前網頁頁面中，例如將 Jquery 載入頁面來方便操作 DOM，或是讀取 cookie 資訊等任何其他想執行的 JS Script，用以方便作為測試或開發除錯等目的。
+This is a chrome extension tool that can inject custom `Script` into the current web page, such as loading Jquery into the page to facilitate DOM operations, or reading cookie information and any other JS Script you want to execute, for the purpose of testing or development debugging.
 
 ## Extension Install
 
-至 [Chrome 線上應用程式商店](https://chrome.google.com/webstore/detail/xss/bebjbdbgpmgdlfehkibnmgmbkcniaeij) 安裝
+Install it from the Chrome Web Store (https://chrome.google.com/webstore/detail/xss/bebjbdbgpmgdlfehkibnmgmbkcniaeij)
 
 ## Auto Execute
 
-v1.1.0 版新增 Auto Execute 功能，切換前方 Auto Execute 狀態後，重整網頁時會在一開始便直接執行 scripts，方便執行一些需要一開始便執行的任務，例如使用 [Polly.js](https://netflix.github.io/pollyjs/) 來處理 mock api 的行為。不過須自己注意所攥寫的 script 不會造成無限重整頁面。
+Version v1.1.0 adds the Auto Execute feature. After switching to the Auto Execute state, scripts will be executed directly at the beginning when the web page is refreshed, which is convenient for executing some tasks that need to be executed at the beginning, such as using [Polly.js](https://netflix.github.io/pollyjs/) to handle the behavior of the mock api. However, you must be careful that the script you write does not cause infinite page refreshes.
 
 ```js
-// 例如這一段 script 啟用 Auto Execute 後會一直重整頁面
+// For example, this script will refresh the page after enabling Auto Execute
 location.reload()
 ```
 
@@ -27,22 +27,22 @@ location.reload()
 
 ## Theme
 
-外掛小圖示按右鍵選擇 `選項` 可取消 `Dark Theme` 改使用 `Light Theme`
+Right click on the plugin icon and select `Options` to cancel `Dark Theme` and use `Light Theme` instead
 
 <img width="469" src="docs/light_theme_1.png">
 <img width="800" src="docs/light_theme_2.png">
 
 ## Export and Import Scripts
 
-對外掛小圖示按右鍵選擇 `Export Scripts` 會將目前所有 Scripts 下載為 `scripts.json`，也可將 `scripts.json` 檔案 Drag 進 XSS 開啟的視窗介面或透過 `選項` 功能 import scripts 便能匯入 Scripts 紀錄。
+Right-click the plugin icon and select `Export Scripts` to download all current scripts as `scripts.json`. You can also drag the `scripts.json` file into the window interface opened by XSS or import scripts through the `Options` function to import the Scripts record.
 
 ## Options
 
 <img width="469" src="docs/options.png">
 
-## Tip
+Tips
 
-Extension 注入 script 時有使用 closure，因此變數不會污染到 window 上。如果需要取得全域層級的參數可以明確使用 window 或 this。
+Extension uses closure when injecting script, so variables will not pollute the window. If you need to obtain global level parameters, you can explicitly use window or this.
 
 ```js
 console.log(this === window); // true
